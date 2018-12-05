@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# convert dataset_mxJiang from Pytorch to MXNet.
+
 import os
 import numpy as np
 import cv2
@@ -68,12 +70,9 @@ class Synhead(Dataset):
         bins = np.array(range(-99, 102, 3))
         binned_pose = np.digitize([yaw, pitch, roll], bins) - 1
 
-        #labels = torch.LongTensor(binned_pose)
-        #cont_labels = torch.FloatTensor([yaw, pitch, roll])
-        labels = np.int64(binned_pose)
-        cont_labels = np.float32([yaw, pitch, roll])
+        labels = np.array(binned_pose, dtype=np.int64)
+        cont_labels = np.array([yaw, pitch, roll], dtype=np.float32)
         
-
         if self.transform is not None:
             img = self.transform(mxnet.nd.array(img))
 
@@ -141,14 +140,13 @@ class Pose_300W_LP(Dataset):
         binned_pose = np.digitize([yaw, pitch, roll], bins) - 1
 
         # Get target tensors
-        labels = binned_pose
-        #cont_labels = torch.FloatTensor([yaw, pitch, roll])
-        cont_labels = np.float32([yaw, pitch, roll])
+        labels = np.array(binned_pose, dtype=np.int64)
+        cont_labels = np.array([yaw, pitch, roll], dtype=np.float32)
 
         if self.transform is not None:
             img = self.transform(mxnet.nd.array(img))
 
-        return img, labels, cont_labels, self.X_train[index]
+        return img, labels, cont_labels
 
     def __len__(self):
         # 122,450
@@ -217,14 +215,14 @@ class Pose_300W_LP_random_ds(Dataset):
         binned_pose = np.digitize([yaw, pitch, roll], bins) - 1
 
         # Get target tensors
-        labels = binned_pose
+        labels = np.array(binned_pose, dtype=np.int64)
         #cont_labels = torch.FloatTensor([yaw, pitch, roll])
-        cont_labels = np.float32([yaw, pitch, roll])
+        cont_labels = np.array([yaw, pitch, roll], dtype=np.float32)
 
         if self.transform is not None:
             img = self.transform(mxnet.nd.array(img))
-
-        return img, labels, cont_labels, self.X_train[index]
+            
+        return img, labels, cont_labels
 
     def __len__(self):
         # 122,450
@@ -272,19 +270,16 @@ class AFLW2000(Dataset):
         roll = pose[2] * 180 / np.pi
         # Bin values
         bins = np.array(range(-99, 102, 3))
-        #torch
-        #labels = torch.LongTensor(np.digitize([yaw, pitch, roll], bins) - 1)
-        #cont_labels = torch.FloatTensor([yaw, pitch, roll])
-        #numpy
-        #labels = np.int64(np.digitize([yaw, pitch, roll], bins) - 1)
-        #cont_labels = np.float32([yaw, pitch, roll])
         #mxnet
         labels = np.array(np.digitize([yaw, pitch, roll], bins) - 1, dtype=np.int64)
         cont_labels = np.array([yaw, pitch, roll], dtype=np.float32)
-
+        #print('img before', img)
         if self.transform is not None:
             img = self.transform(mxnet.nd.array(img))
-        
+        #print('img after', img)
+        #print('labels',labels)
+        #print('cont_labels',cont_labels)
+        #print('name',self.X_train[index])
         return img, labels, cont_labels
 
     def __len__(self):
@@ -338,15 +333,14 @@ class AFLW2000_ds(Dataset):
         roll = pose[2] * 180 / np.pi
         # Bin values
         bins = np.array(range(-99, 102, 3))
-        #labels = torch.LongTensor(np.digitize([yaw, pitch, roll], bins) - 1)
-        #cont_labels = torch.FloatTensor([yaw, pitch, roll])
-        labels = np.int64(np.digitize([yaw, pitch, roll], bins) - 1)
-        cont_labels = np.flot32([yaw, pitch, roll])
+        
+        labels = np.array(np.digitize([yaw, pitch, roll], bins) - 1, dtype=np.int64)
+        cont_labels = np.array([yaw, pitch, roll], dtype=np.float32)
         
         if self.transform is not None:
             img = self.transform(mxnet.nd.array(img))
 
-        return img, labels, cont_labels, self.X_train[index]
+        return img, labels, cont_labels
 
     def __len__(self):
         # 2,000
@@ -393,15 +387,14 @@ class AFLW_aug(Dataset):
 
         # Bin values
         bins = np.array(range(-99, 102, 3))
-        #labels = torch.LongTensor(np.digitize([yaw, pitch, roll], bins) - 1)
-        #cont_labels = torch.FloatTensor([yaw, pitch, roll])
-        labels = np.int64(np.digitize([yaw, pitch, roll], bins) - 1)
-        cont_labels = np.float32([yaw, pitch, roll])
+        
+        labels = np.array(np.digitize([yaw, pitch, roll], bins) - 1, dtype=np.int64)
+        cont_labels = np.array([yaw, pitch, roll], dtype=np.float32)
         
         if self.transform is not None:
             img = self.transform(mxnet.nd.array(img))
-
-        return img, labels, cont_labels, self.X_train[index]
+            
+        return img, labels, cont_labels
 
     def __len__(self):
         # train: 18,863
@@ -439,15 +432,14 @@ class AFLW(Dataset):
         roll *= -1
         # Bin values
         bins = np.array(range(-99, 102, 3))
-        #labels = torch.LongTensor(np.digitize([yaw, pitch, roll], bins) - 1)
-        #cont_labels = torch.FloatTensor([yaw, pitch, roll])
-        labels = np.int64(np.digitize([yaw, pitch, roll], bins) - 1)
-        cont_labels = np.float32([yaw, pitch, roll])
+        
+        labels = np.array(np.digitize([yaw, pitch, roll], bins) - 1, dtype=np.int64)
+        cont_labels = np.array([yaw, pitch, roll], dtype=np.float32)
 
         if self.transform is not None:
             img = self.transform(mxnet.nd.array(img))
 
-        return img, labels, cont_labels, self.X_train[index]
+        return img, labels, cont_labels
 
     def __len__(self):
         # train: 18,863
@@ -496,15 +488,14 @@ class AFW(Dataset):
 
         # Bin values
         bins = np.array(range(-99, 102, 3))
-        #labels = torch.LongTensor(np.digitize([yaw, pitch, roll], bins) - 1)
-        #cont_labels = torch.FloatTensor([yaw, pitch, roll])
-        labels = np.int64(np.digitize([yaw, pitch, roll], bins) - 1)
-        cont_labels = np.float32([yaw, pitch, roll])
+        
+        labels = np.array(np.digitize([yaw, pitch, roll], bins) - 1, dtype=np.int64)
+        cont_labels = np.array([yaw, pitch, roll], dtype=np.float32)
 
         if self.transform is not None:
             img = self.transform(mxnet.nd.array(img))
 
-        return img, labels, cont_labels, self.X_train[index]
+        return img, labels, cont_labels
 
     def __len__(self):
         # Around 200
@@ -577,15 +568,13 @@ class BIWI(Dataset):
         bins = np.array(range(-99, 102, 3))
         binned_pose = np.digitize([yaw, pitch, roll], bins) - 1
 
-        #labels = torch.LongTensor(binned_pose)
-        #cont_labels = torch.FloatTensor([yaw, pitch, roll])
-        labels = np.int64(binned_pose)
-        cont_labels = np.float32([yaw, pitch, roll])
+        labels = np.array(binned_pose, dtype=np.int64)
+        cont_labels = np.array([yaw, pitch, roll], dtype=np.float32)
 
         if self.transform is not None:
             img = self.transform(mxnet.nd.array(img))
 
-        return img, labels, cont_labels, self.X_train[index]
+        return img, labels, cont_labels
 
     def __len__(self):
         # 15,667

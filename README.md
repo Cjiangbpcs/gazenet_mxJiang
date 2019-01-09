@@ -1,6 +1,6 @@
 # hopenet_mxJiang
 
-This project aims to identify one's gazing directions in a video, by converting Deep-Head-Pose Hopenet in Pytorch to MXNet Gluon. 
+Hopenet, aims to identify one's gazing directions in a video, by converting Deep-Head-Pose Hopenet in Pytorch to MXNet Gluon. 
 
 The accuracy of this gluon version is close to the original Pytorch version. 
 

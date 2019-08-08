@@ -30,4 +30,12 @@ year = {2019}
 }
 ```
 
+```
+@inproceedings{najibi2017ssh,
+title={{SSH}: Single Stage Headless Face Detector},
+author={Najibi, Mahyar and Samangouei, Pouya and Chellappa, Rama and Davis, Larry},
+booktitle={The IEEE International Conference on Computer Vision (ICCV)},
+year={2017}
+}
+```
 

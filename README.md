@@ -3,7 +3,7 @@
 We adopted the no-keypoints approach and reimplemented Ruiz et al., 2018 algorithm in
 MXNET/GLUON (hereafter gazenet). 
 
-### Why GLUON? 
+### Why MXNET/GLUON? 
 
 Compared to other deep learning platforms, MXNET (with
 GLUON API) not only provides the same simplicity and flexibility as Pytorch, but also allows

@@ -1,7 +1,11 @@
 # Gazenet: head pose estimation without keypoints in MXNET/GLUON
 
 We adopted the no-keypoints approach and reimplemented Ruiz et al., 2018 algorithm in
-MXNET/GLUON (hereafter gazenet). Compared to other deep learning platforms, MXNET (with
+MXNET/GLUON (hereafter gazenet). 
+
+# Why GLUON? 
+
+Compared to other deep learning platforms, MXNET (with
 GLUON API) not only provides the same simplicity and flexibility as Pytorch, but also allows
 data scientists to hybridize the deep learning networks to leverage performance optimizations of
 the symbolic graph. Moreover, MXNET/GLUON does not need to specify the input size of
@@ -10,8 +14,10 @@ convolutional layers, and it can create a namescope to attach a unique name to e
 Finally, its scalability and stability attract many retail companies to select MXNET/GLUON
 platform for their product deployment.
 
+# How gaznet work?
+
 This gazenet algorithm takes in 3-channel (RGB) images and outputs three unit vectors of a
-person's gazing direction, that is, yaw, roll, and pitch, as illustrated below. The bounding box of
+person's gazing direction, that is, yaw, roll, and pitch. The bounding box of
 that person’s face is provided by a face detector we modified and trained based on the paper of
 Najibi et al., 2017. Given the bounding box of a face, gazenet can detect that person’s gazing
 directions even when that person is looking sideways and when the video or images are in

@@ -14,7 +14,7 @@ convolutional layers, and it can create a namescope to attach a unique name to e
 Finally, its scalability and stability attract many retail companies to select MXNET/GLUON
 platform for their product deployment.
 
-### How gaznet work?
+### How gazenet work?
 
 This gazenet algorithm takes in 3-channel (RGB) images and outputs three unit vectors of a
 person's gazing direction, that is, yaw, roll, and pitch. The bounding box of

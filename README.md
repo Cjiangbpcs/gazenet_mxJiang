@@ -3,7 +3,7 @@
 We adopted the no-keypoints approach and reimplemented Ruiz et al., 2018 algorithm in
 MXNET/GLUON (hereafter gazenet). 
 
-# Why GLUON? 
+### Why GLUON? 
 
 Compared to other deep learning platforms, MXNET (with
 GLUON API) not only provides the same simplicity and flexibility as Pytorch, but also allows
@@ -14,7 +14,7 @@ convolutional layers, and it can create a namescope to attach a unique name to e
 Finally, its scalability and stability attract many retail companies to select MXNET/GLUON
 platform for their product deployment.
 
-# How gaznet work?
+### How gaznet work?
 
 This gazenet algorithm takes in 3-channel (RGB) images and outputs three unit vectors of a
 person's gazing direction, that is, yaw, roll, and pitch. The bounding box of
@@ -26,7 +26,7 @@ approach tends to be fragile.
 
 The original Pytorch algorithm can be found here: https://github.com/natanielruiz/deep-head-pose.
 
-# References:
+### References:
 
 ```
 @InProceedings{Ruiz_2018_CVPR_Workshops,

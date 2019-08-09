@@ -1,10 +1,22 @@
-# hopenet_mxJiang
+# Gazenet: head pose estimation without keypoints in MXNET/GLUON
 
-Deep-Head-Pose Hopenet, aiming to identify one's gazing directions in a video, is converted from Pytorch to MXNet Gluon in this repository. 
+We adopted the no-keypoints approach and reimplemented Ruiz et al., 2018 algorithm in
+MXNET/GLUON (hereafter gazenet). Compared to other deep learning platforms, MXNET (with
+GLUON API) not only provides the same simplicity and flexibility as Pytorch, but also allows
+data scientists to hybridize the deep learning networks to leverage performance optimizations of
+the symbolic graph. Moreover, MXNET/GLUON does not need to specify the input size of
+networks, instead, it directly specifies the activation functions in the fully connected and the
+convolutional layers, and it can create a namescope to attach a unique name to each layer.
+Finally, its scalability and stability attract many retail companies to select MXNET/GLUON
+platform for their product deployment.
 
-The accuracy of this gluon version is comparable to its original Pytorch version. 
-
-The pre-trained parameters and architectures can be requested via issues. They can be used to test on your own videos.
+This gazenet algorithm takes in 3-channel (RGB) images and outputs three unit vectors of a
+person's gazing direction, that is, yaw, roll, and pitch, as illustrated below. The bounding box of
+that person’s face is provided by a face detector we modified and trained based on the paper of
+Najibi et al., 2017. Given the bounding box of a face, gazenet can detect that person’s gazing
+directions even when that person is looking sideways and when the video or images are in
+relatively low resolution, where the face landmarks are hard to detect thus the keypoint
+approach tends to be fragile.
 
 The original Pytorch algorithm can be found here: https://github.com/natanielruiz/deep-head-pose.
 

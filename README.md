@@ -10,7 +10,7 @@ This gazenet algorithm takes in 3-channel (RGB) images and outputs three unit ve
 
 Similar to Ruiz et al., 2018 and Shao et al., 2019, gazenet employs a pre-trained ResNet50 (He et al., 2015) architecture followed by a fully connected layer, and a softmax function is then used to derive the class scores. Multi-loss functions are used to classify and regress each angle to degrees. Its architecture is illustrated below. Gazenet achieves comparable performance as Ruiz et al., 2018 on the public data set of AFLW2000 with approximately 6.5 degrees average errors for yaw, roll, pitch, and mean squared error. Its open-sourced MXNet/Gluon implementation is here: https://github.com/Cjiangbpcs/gazenet_mxJiang/blob/master/README.md. A description of a video analytics product that adopted gazenet can be found here: https://bpcs.com/reflect.
 
-<img src="./deep_head_pose_architecture.png" width="600" height="400" />
+<img src="./gazenet_architecture.png" width="600" height="400" />
 
 The estimated Euler angles can be further aggregated to provide insights about hot product candidates at stores for marketing experiments. This new data, together with traditional sales data, can provide retail stores valuable information to design experiments and drive measurable business impacts.
 
